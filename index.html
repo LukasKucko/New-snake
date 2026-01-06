@@ -10,12 +10,11 @@
 <body>
     <div id="preload"><span class="loader"></span></div>  
 
-    <!-- Audio - súbory musia byť v assets/sounds/ -->
-    <audio id="soundForest" src="assets/forest.mp3" preload="auto"></audio>
+    <!-- ZVUKY - Uisti sa, že sú v priečinku assets/ -->
     <audio id="soundApple" src="assets/eatFruit.mp3" preload="auto"></audio>
     <audio id="music" src="assets/musicMenu.mp3" preload="auto" loop></audio>
-    <audio id="chooseMenu" src="assets/chooseMenu.mp3" preload="auto"></audio>
     <audio id="hitWall" src="assets/hitWall.mp3" preload="auto"></audio>
+    <audio id="chooseMenu" src="assets/chooseMenu.mp3" preload="auto"></audio>
 
     <div id="container">
         <div id="header-layout">
@@ -25,18 +24,21 @@
             </div>
         </div>
 
+        <!-- MENU -->
         <div id="menu">
             <div id="menuTable">
                 <div id="speed" class="menu-item">Speed: <span id="speedNumber">normal</span></div>
                 <div id="backGroundPlayground" class="menu-item">Background - white</div>
                 <div id="musicMenu" class="menu-item">Music: <span id="musicOnOff">off</span></div>
-                <div id="vibration" class="menu-item">Vibration: <span id="vibrationOnOff">on</span></div>
-                <p>Press START to play</p>
+                <p id="pressStartToPlay">PRESS START TO PLAY</p>
             </div>
         </div>
 
-        <canvas id="playground"></canvas>
+        <div id="boardBorder">
+            <canvas id="playground"></canvas>
+        </div>
 
+        <!-- OVLÁDANIE PRE MOBILY -->
         <div id="controls">
             <div id="start">START</div>
             <div id="control-up" class="btn">▲</div>
@@ -46,8 +48,9 @@
         </div>
     </div>
 
-    <script src="canvas.js"></script>
-    <script src="function.js"></script>
-    <script src="main.js"></script>
+    <!-- SKRIPTY -->
+    <script src="variables.js"></script>
+    <script src="snakeMethods.js"></script>
+    <script src="snake.js"></script>
 </body>
 </html>
