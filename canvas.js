@@ -7,17 +7,17 @@ canvas.width = block * 20;
 canvas.height = block * 20;
 
 // --- OBRAZKY ---
-const IMG_PATH = "assets/images/";
+const IMG_PATH = "assets/";
 const images = {
     apple: new Image(), skin: new Image(),
     hUp: new Image(), hDown: new Image(), hLeft: new Image(), hRight: new Image()
 };
-images.apple.src = IMG_PATH + "apple.png";
-images.skin.src = IMG_PATH + "skin2.png";
-images.hUp.src = IMG_PATH + "snakeHeadUp.png";
-images.hDown.src = IMG_PATH + "snakeHeadDown.png";
-images.hLeft.src = IMG_PATH + "snakeHeadLeft.png";
-images.hRight.src = IMG_PATH + "snakeHeadRight.png";
+apple.src = IMG_PATH + "apple.png";
+skin.src = IMG_PATH + "skin2.png";
+hUp.src = IMG_PATH + "snakeHeadUp.png";
+hDown.src = IMG_PATH + "snakeHeadDown.png";
+hLeft.src = IMG_PATH + "snakeHeadLeft.png";
+hRight.src = IMG_PATH + "snakeHeadRight.png";
 
 // --- AUDIO ---
 const audio = {
