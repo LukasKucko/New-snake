@@ -1,144 +1,107 @@
-@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Gluten:wght@800&family=Indie+Flower&family=Merienda:wght@300..900&display=swap');
-
+/* ZÁKLADNÉ NASTAVENIE PRE ROK 2026 */
 :root {
-    --grey: #b2b2c2;
-    --menuLine: linear-gradient(to top, #8d8b3b 0%, #542a15 100%);
-    --menuBoxShadow: 0px 0px 25px 2px #528d5a;
-    --menuFontColor: #95ffe0;
-    --borderRadiusMenu: 50px;
-    font-family: "DynaPuff", system-ui;
+    --menuLine: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    --menuBoxShadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Odstráni modrý odlesk pri kliknutí na mobile */
+    outline: none;
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #000;
-    user-select: none;
-    -webkit-user-select: none;
-    overflow: hidden;
-    /* Zamedzenie systémových gest pri hraní */
-    touch-action: none;
-}
-
-/* PRELOADER - Zachovaný tvoj štýl */
-#preload {
-    position: fixed;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(76.3deg, rgba(44,62,78,1) 12.6%, rgba(69,103,131,1) 82.8%);
-    z-index: 1000000;
+    background-color: var(--bg-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* Zákaz scrollovania */
+    touch-action: none; /* Zákaz gest prehliadača */
+    color: var(--text-color);
 }
 
-.loader {
-    width: 90px;
-    height: 90px;
-    border: 7px solid #d0d0d0;
-    border-radius: 50%;
-    animation: rotation 1s linear infinite;
-}
-
-/* HLAVNÝ KONTAJNER */
 #container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    margin: auto;
-    /* Cesta zmenená pre Google Play Assets */
-    background-image: url("assets/contBack.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
-/* HEADER A SCORE - Responzívne */
-#header-layout {
-    position: absolute;
-    top: 10px;
-    left: 5%;
-    width: 65%;
-    height: 10vh;
-    color: var(--menuFontColor);
-    background: url("assets/scoreTable.png") no-repeat center/100% 100%;
-    z-index: 100;
-}
-
-#centerScore {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    width: 100%;
     height: 100%;
-    font-size: 3.5vw;
+    max-width: 500px; /* Obmedzenie pre tablety, aby hra nebola príliš roztiahnutá */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: env(safe-area-inset-top) 10px env(safe-area-inset-bottom) 10px;
 }
 
-/* EXIT TLAČIDLO */
-#exit {
-    position: absolute;
-    top: 10px;
-    right: 5%;
-    width: 20%;
-    height: 8vh;
-    background: url("assets/exit.png") no-repeat center/100% 100%;
-    color: var(--menuFontColor);
+/* HEADER SO SKÓRE */
+#header-layout {
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 4vw;
+    font-size: 1.2rem;
+    font-weight: bold;
+    z-index: 10;
 }
 
-/* HERNÁ PLOCHA - Dôležitá zmena na Responzivitu */
+#centerScore span {
+    margin: 0 15px;
+}
+
+/* HERNÁ PLOCHA - CANVAS */
 #boardBorder {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90vw; /* Šírka podľa displeja */
-    max-width: 400px; /* Maximálna veľkosť pre tablety */
-    aspect-ratio: 1 / 1;
-    background: url("assets/startButton.png") no-repeat center/cover;
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #playground {
-    width: 90%;
-    height: 90%;
-    background-color: #fff; /* Predvolená, JS ju zmení */
-    border-radius: 5px;
+    background-color: #ffffff;
+    border: 4px solid #444;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-/* MENU TABLE */
-#menuTable {
+/* MENU A PRELOADER */
+#menu, #preload, #gameOver {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 85%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
 }
 
-.menu-item-style {
-    padding: 10px;
-    border-radius: var(--borderRadiusMenu);
+#menuTable {
+    width: 85%;
+    padding: 20px;
+    border-radius: 15px;
+    background: #222;
+    border: 2px solid #4facfe;
     text-align: center;
-    background-color: rgba(0,0,0,0.5);
-    color: var(--menuFontColor);
 }
 
-/* OVLÁDANIE (CONTROLS) - Pridané pre mobily */
+.menu-item {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+/* OVLÁDACIE PRVKY (CONTROLS) */
 #controls {
-    position: absolute;
-    bottom: 5vh;
-    width: 100%;
-    height: 25vh;
+    height: 35vh; /* Vyhradené miesto pre prsty pod hrou */
     display: grid;
     grid-template-areas: 
         ". up ."
@@ -146,21 +109,52 @@ body {
         ". down .";
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 5px;
+    gap: 10px;
     padding: 10px;
 }
 
-#controls div {
-    background: rgba(255,255,255,0.1);
-    border-radius: 10px;
+.btn, #start {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-size: 2rem;
+    background: #333;
+    border-radius: 15px;
+    font-size: 1.5rem;
+    box-shadow: 0 4px #000;
+    active: transform: translateY(2px);
+    active: box-shadow: 0 2px #000;
 }
 
-#start { grid-area: start; background: #27ae60 !important; font-size: 1rem !important; }
+#start {
+    grid-area: start;
+    background: #27ae60;
+    font-weight: bold;
+    font-size: 1rem;
+}
 
-/* Ostatné animácie zachované */
-@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+#control-up { grid-area: up; }
+#control-down { grid-area: down; }
+#control-left { grid-area: left; }
+#control-right { grid-area: right; }
+
+/* ANIMÁCIE */
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* RESPONSIVITA PRE MALÉ MOBILY */
+@media (max-height: 600px) {
+    #controls { height: 40vh; }
+    #header-layout { height: 40px; font-size: 1rem; }
+}
